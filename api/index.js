@@ -5,12 +5,11 @@ var cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const app = express();
-app.use(express.static("public"));
 app.use(express.json());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "https://home-brew-eta.vercel.app",
   })
 );
 
