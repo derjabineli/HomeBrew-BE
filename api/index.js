@@ -14,7 +14,6 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  console.log(process.env.FRONTEND_URL);
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://home-brew-eta.vercel.app"
