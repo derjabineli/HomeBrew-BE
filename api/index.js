@@ -8,6 +8,12 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+  })
+);
+
 app.use((req, res, next) => {
   console.log(process.env.FRONTEND_URL);
   res.setHeader(
