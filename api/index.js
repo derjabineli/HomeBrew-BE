@@ -5,15 +5,17 @@ var cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const app = express();
-app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+  })
+);
+
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://home-brew-eta.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", `${process.env.FRONTEND_URL}`);
 
   // Allow specific HTTP methods
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
