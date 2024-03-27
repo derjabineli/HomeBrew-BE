@@ -9,6 +9,22 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
+
+  // Allow specific HTTP methods
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+
+  // Allow specific headers to be sent in the request
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // Allow credentials (e.g., cookies, authentication) to be included in requests
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Continue to the next middleware or route handler
+  next();
+});
+
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
   const items = req.body.items;
